@@ -5,11 +5,9 @@ import numpy as np
 from PIL import Image
 import pickle
 
-from IPython.display import HTML
+
 import streamlit as st
-from gtts import gTTS
-from pydub import AudioSegment
-from io import BytesIO
+
 
 # Dictionary mapping class indices to class names
 classes = { 0:'Speed limit (20km/h)',
@@ -83,18 +81,7 @@ def predict_traffic_sign(image):
     # Predict using the loaded model
     prediction = np.argmax(loaded_model.predict(image))
     return classes[prediction]
-
-# Function to convert text to audio and embed it in HTML
-def text_to_audio(text, language='en'):
-    # Generate audio from text
-    tts = gTTS(text=text, lang=language, slow=False)
-    # Save audio as a temporary file
-    audio_path = "prediction_audio.mp3"
-    tts.save(audio_path)
-    # Create HTML audio player with autoplay
-    audio_html = f'<audio autoplay="autoplay" controls="controls"><source src="{audio_path}" type="audio/mp3"></audio>'
-    return audio_html
-
+            
 
 def main():
     st.title("Traffic Sign Recognition App")
@@ -112,19 +99,6 @@ def main():
         # Make prediction
         prediction = predict_traffic_sign(image)
         st.write("Prediction:", prediction)
-
-        # audio_path = "D:/mine_/code files @@/pythonf/traffic_proj/outputaudio.mp3"
-
-        # # Display the audio player
-        # st.audio(audio_path, format='audio/mp3')
-
-        # Example usage
-        # Replace this with your prediction value
-        st.write("Prediction:", prediction)
-
-        # Convert prediction text to audio and display it
-        audio_html = text_to_audio(prediction)
-        st.write(HTML(audio_html))
 
 
 
