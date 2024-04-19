@@ -60,7 +60,7 @@ classes = { 0:'Speed limit (20km/h)',
 from keras.models import load_model
 
 # Load the model
-loaded_model = load_model('D:/mine_/code files @@/pythonf/traffic_proj/modelh.h5')
+loaded_model = load_model('modelh.h5')
 
 
 # Load the pre-trained model
